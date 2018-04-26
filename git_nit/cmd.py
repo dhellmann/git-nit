@@ -14,9 +14,23 @@
 
 from __future__ import print_function
 
+import argparse
+import pkg_resources
+def get_version():
+    requirement = pkg_resources.Requirement.parse('git-nit')
+    provider = pkg_resources.get_provider(requirement)
+    return provider.version
+
+
 
 def main():
-    pass
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--version',
+        action='version',
+        version=get_version(),
+    )
+    args = parser.parse_args()
 
 
 if __name__ == '__main__':
