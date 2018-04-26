@@ -89,11 +89,10 @@ def main():
         version=get_version(),
     )
     parser.add_argument(
-        '--project-dir',
-        default=os.environ.get('PROJECT_DIR', '.'),
-        help=(
-            'parent directory for creating a new project, '
-            'defaults to $PROJECT_DIR or "."'),
+        '--short-names', '-s',
+        action='store_true',
+        default=False,
+        help='use the short repo name without the subject',
     )
     parser.add_argument(
         'review',
@@ -113,16 +112,10 @@ def main():
     for old, new in [(' ', '-'), (':', ''), ("'", ''), ('"', '')]:
         subject = subject.replace(old, new)
 
-    clone_to = '{}-{}-{}'.format(short_repo, review, subject)
-    print(clone_to)
-
-    output_dir = os.path.join(args.project_dir, clone_to)
-    if os.path.exists(output_dir):
-        sys.exit('{} already exists'.format(output_dir))
-
-    if not os.path.exists(args.project_dir):
-        print('Creating project directory {}'.format(args.project_dir))
-        os.makedirs(args.project_dir)
+    if args.short_names:
+        clone_to = short_repo
+    else:
+        clone_to = '{}-{}-{}'.format(short_repo, review, subject)
 
     git_cmd = [
         'git',
@@ -130,13 +123,9 @@ def main():
         'git://git.openstack.org/{}'.format(repo),
         clone_to,
     ]
-    if args.project_dir != '.':
-        cwd = args.project_dir
-    else:
-        cwd = None
-    print('Cloning {} into {}'.format(repo, output_dir))
+    print('Cloning {} into {}'.format(repo, clone_to))
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=cwd, check=True)
+    subprocess.run(git_cmd, check=True)
 
     git_cmd = [
         'git',
@@ -145,7 +134,7 @@ def main():
     ]
     print('\nConfiguring git-review')
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=output_dir, check=True)
+    subprocess.run(git_cmd, cwd=clone_to, check=True)
 
     git_cmd = [
         'git',
@@ -159,7 +148,7 @@ def main():
     git_cmd.append(target)
     print('\nDownloading {}'.format(args.review))
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=output_dir, check=True)
+    subprocess.run(git_cmd, cwd=clone_to, check=True)
 
     git_cmd = [
         'git',
@@ -168,9 +157,9 @@ def main():
     ]
     print('\nUpdating all remotes')
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=output_dir, check=True)
+    subprocess.run(git_cmd, cwd=clone_to, check=True)
 
-    print('\nPatch ready in {}'.format(output_dir))
+    print('\nPatch ready in {}'.format(clone_to))
 
 
 if __name__ == '__main__':

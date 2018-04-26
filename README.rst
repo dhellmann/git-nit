@@ -102,6 +102,47 @@ draft older than the most recent patchset.
 
   Patch ready in ./release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
 
+Use the ``--short-name`` option to change the default behavior and
+name the output directory after the repository without including the
+patchset number and subject.
+
+::
+
+  $ git-nit -s  https://review.openstack.org/#/c/564559/1/
+  Cloning openstack-infra/release-tools into release-tools
+  git clone git://git.openstack.org/openstack-infra/release-tools release-tools
+  Cloning into 'release-tools'...
+  remote: Counting objects: 2320, done.
+  remote: Compressing objects: 100% (989/989), done.
+  remote: Total 2320 (delta 1493), reused 2115 (delta 1318)
+  Receiving objects: 100% (2320/2320), 2.73 MiB | 2.24 MiB/s, done.
+  Resolving deltas: 100% (1493/1493), done.
+  Checking connectivity... done.
+
+  Configuring git-review
+  git review -s
+  Creating a git remote called 'gerrit' that maps to:
+     ssh://doug-hellmann@review.openstack.org:29418/openstack-infra/release-tools.git
+
+  Downloading https://review.openstack.org/#/c/564559/1/
+  git review -d 564559,1
+  Downloading refs/changes/59/564559/1 from gerrit
+  Switched to branch "review/doug_hellmann/announce-script-fixes-patch1"
+
+  Updating all remotes
+  git remote update
+  Fetching origin
+  remote: Counting objects: 1501, done.
+  remote: Compressing objects: 100% (659/659), done.
+  remote: Total 1501 (delta 842), reused 1501 (delta 842)
+  Receiving objects: 100% (1501/1501), 218.28 KiB | 0 bytes/s, done.
+  Resolving deltas: 100% (842/842), done.
+  From git://git.openstack.org/openstack-infra/release-tools
+   * [new ref]         refs/notes/review -> refs/notes/review
+  Fetching gerrit
+
+  Patch ready in release-tools
+
 Resources
 =========
 
