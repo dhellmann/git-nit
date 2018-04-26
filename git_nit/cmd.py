@@ -16,13 +16,11 @@ from __future__ import print_function
 
 import argparse
 import json
-import os
 import subprocess
-import sys
-import urllib
 
 import pkg_resources
 import requests
+from six.moves import urllib
 
 
 def get_version():
@@ -125,7 +123,7 @@ def main():
     ]
     print('Cloning {} into {}'.format(repo, clone_to))
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, check=True)
+    subprocess.check_call(git_cmd)
 
     git_cmd = [
         'git',
@@ -134,7 +132,7 @@ def main():
     ]
     print('\nConfiguring git-review')
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=clone_to, check=True)
+    subprocess.check_call(git_cmd, cwd=clone_to)
 
     git_cmd = [
         'git',
@@ -148,7 +146,7 @@ def main():
     git_cmd.append(target)
     print('\nDownloading {}'.format(args.review))
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=clone_to, check=True)
+    subprocess.check_call(git_cmd, cwd=clone_to)
 
     git_cmd = [
         'git',
@@ -157,7 +155,7 @@ def main():
     ]
     print('\nUpdating all remotes')
     print(' '.join(git_cmd))
-    subprocess.run(git_cmd, cwd=clone_to, check=True)
+    subprocess.check_call(git_cmd, cwd=clone_to)
 
     print('\nPatch ready in {}'.format(clone_to))
 
