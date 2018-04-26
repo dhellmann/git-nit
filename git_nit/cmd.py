@@ -16,7 +16,9 @@ from __future__ import print_function
 
 import argparse
 import json
+import os
 import subprocess
+import sys
 
 import pkg_resources
 import requests
@@ -114,6 +116,9 @@ def main():
         clone_to = short_repo
     else:
         clone_to = '{}-{}-{}'.format(short_repo, review, subject)
+
+    if os.path.exists(clone_to):
+        sys.exit('{} already exists'.format(clone_to))
 
     git_cmd = [
         'git',
