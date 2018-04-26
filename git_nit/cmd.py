@@ -15,12 +15,43 @@
 from __future__ import print_function
 
 import argparse
+import os
+
 import pkg_resources
+from six.moves import urllib
+
+
 def get_version():
     requirement = pkg_resources.Requirement.parse('git-nit')
     provider = pkg_resources.get_provider(requirement)
     return provider.version
 
+
+def parse_review_id(review_id):
+    "Given a review URL or ID return the review number and PS number, if any."
+    parsed = urllib.parse.urlparse(review_id)
+    if parsed.fragment:
+        # https://review.openstack.org/#/c/564559/ style
+        parts = [
+            p
+            for p in parsed.fragment.split('/')
+            if p and p != 'c'
+        ]
+    else:
+        # https://review.openstack.org/564559/ style
+        parts = [
+            p
+            for p in parsed.path.split('/')
+            if p
+        ]
+    if not parts:
+        raise ValueError('Could not parse review ID {!r}'.format(review_id))
+    review = parts[0]
+    if len(parts) > 1:
+        patchset = parts[1]
+    else:
+        patchset = None
+    return (review, patchset)
 
 
 def main():
@@ -30,8 +61,21 @@ def main():
         action='version',
         version=get_version(),
     )
+    parser.add_argument(
+        '--project-dir',
+        default=os.environ.get('PROJECT_DIR', '.'),
+        help=(
+            'parent directory for creating a new project, '
+            'defaults to $PROJECT_DIR or "."'),
+    )
+    parser.add_argument(
+        'review',
+        help='the URL for the review',
+    )
     args = parser.parse_args()
 
+    review, patchset = parse_review_id(args.review)
+    print(review, patchset)
 
 if __name__ == '__main__':
     main()
