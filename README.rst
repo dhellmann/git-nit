@@ -143,6 +143,11 @@ patchset number and subject.
 
   Patch ready in release-tools
 
+After the patch has been downloaded, move into the new directory and
+make the relevant changes, then use ``git review`` to post the new
+patchset. You can update the existing patch with ``git commit
+--amend`` or create a new one as a series.
+
 Resources
 =========
 
