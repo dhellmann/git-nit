@@ -22,7 +22,7 @@ patch as the first argument.
 
 ::
 
-  $ git-nit https://review.openstack.org/#/c/564559/
+  $ git nit https://review.openstack.org/#/c/564559/
   release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
   Cloning openstack-infra/release-tools into ./release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
   git clone git://git.openstack.org/openstack-infra/release-tools release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
@@ -66,7 +66,7 @@ draft older than the most recent patchset.
 
 ::
 
-  $ git-nit  https://review.openstack.org/#/c/564559/1/
+  $ git nit  https://review.openstack.org/#/c/564559/1/
   release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
   Cloning openstack-infra/release-tools into ./release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
   git clone git://git.openstack.org/openstack-infra/release-tools release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
@@ -108,7 +108,7 @@ patchset number and subject.
 
 ::
 
-  $ git-nit -s  https://review.openstack.org/#/c/564559/1/
+  $ git nit -s  https://review.openstack.org/#/c/564559/1/
   Cloning openstack-infra/release-tools into release-tools
   git clone git://git.openstack.org/openstack-infra/release-tools release-tools
   Cloning into 'release-tools'...
