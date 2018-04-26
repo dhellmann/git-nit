@@ -102,7 +102,7 @@ draft older than the most recent patchset.
 
   Patch ready in ./release-tools-564559-finish-moving-announce.sh-to-releases-repo-by-deleting-it
 
-Use the ``--short-name`` option to change the default behavior and
+Use the ``--short-name`` (or ``-s``) option to change the default behavior and
 name the output directory after the repository without including the
 patchset number and subject.
 
