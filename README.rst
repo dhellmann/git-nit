@@ -147,6 +147,5 @@ Resources
 =========
 
 * Free software: Apache license
-* Documentation: http://docs.openstack.org/git-nit/latest/
-* Source: https://git.openstack.org/cgit/openstack/git-nit
-* Bugs: https://storyboard.openstack.org/#!/project/
+* Source: https://github.com/dhellmann/git-nit
+* Bugs: https://github.com/dhellmann/git-nit/issues
