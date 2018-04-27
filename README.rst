@@ -7,6 +7,16 @@ A git command for fixing nit-picky changes on gerrit reviews.
 git-nit is a tool that helps grabbing existing reviews on gerrit and
 layering on a new patch to fix nits.
 
+Normally review comments are left on the patch in the web UI or via
+gertty. For really small suggestions, however, it is nicer to just
+propose the update either as a new revision of a patch or as a
+follow-up patch. git-nit helps you do that by making it easier to grab
+the patch being reviewed in a local copy of the repository. It
+automates the steps of cloning the repository to a new directory,
+configuring git-review, then downloading the patch in
+question. Running one command will set you up to help the person whose
+code you are reviewing.
+
 Installing
 ==========
 
