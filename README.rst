@@ -162,5 +162,5 @@ Resources
 =========
 
 * Free software: Apache license
-* Source: https://github.com/dhellmann/git-nit
-* Bugs: https://github.com/dhellmann/git-nit/issues
+* Source: http://git.openstack.org/cgit/openstack/git-nit
+* Bugs: https://storyboard.openstack.org/#!/project/979
